@@ -8,7 +8,7 @@ let tab = 'semaforo', timer = null;
 
 const fmtDT = (iso) => (iso ? new Date(iso).toLocaleString('es-CL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—');
 const money = (n) => (n === '' || n == null ? '' : '$' + Number(n).toLocaleString('es-CL'));
-const img = (u) => (u ? `${u}?t=${S.token}` : '');
+const img = (u) => (!u ? '' : u.startsWith('data:') ? u : `${u}?t=${S.token}`);
 function toast(m) { const t = $('#toast'); t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => (t.hidden = true), 3000); }
 
 async function A(path, body, raw) {

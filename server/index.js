@@ -476,8 +476,7 @@ app.get('/api/admin/bitacora.xlsx', staff, async (req, res) => {
   ws.autoFilter = { from: 'A1', to: { row: 1, column: COLS.length } };
   res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   res.setHeader('Content-Disposition', `attachment; filename="bitacora_${p.mes}${p.id_vehiculo ? '_' + p.id_vehiculo : ''}.xlsx"`);
-  await wb.xlsx.write(res);
-  res.end();
+  res.send(Buffer.from(await wb.xlsx.writeBuffer()));
 });
 
 // ---------------- Archivos estáticos ----------------

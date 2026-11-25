@@ -33,10 +33,22 @@ estanque bajo, boleta pendiente, documentos por vencer/vencidos, licencias), ven
 circulación, validación cruzada de boletas, tarjetas de combustible, transcripción de bitácora de emergencia (papel + foto),
 bitácora mensual en **Excel y PDF** con las 16 columnas de la bitácora actual, QR imprimibles por vehículo, y mantenedores.
 
+## Demo en GitHub Pages (sin servidor)
+
+`docs/` contiene una **demo estática**: la misma app, con el servidor ejecutándose dentro del navegador y los datos guardados
+en el propio dispositivo (no se comparten entre personas; cualquier PIN sirve). Sirve para mostrarla, no para uso real.
+
+1. En GitHub: **Settings → Pages → Build and deployment → Deploy from a branch** → rama `claude/fleet-management-system-hmwxeq` (o `main` tras fusionarla), carpeta **`/docs`**.
+2. Queda en `https://<usuario>.github.io/Control-flota-sag-/` (app del conductor) y `.../admin/` (panel).
+3. Si cambia el código: `npm run build:demo` regenera `docs/` (no lo edite a mano).
+
+Límites de la demo: el QR se genera pero las fotos/firmas del Excel no se incrustan; no hay sincronización entre dispositivos.
+
 ## Pruebas
 
 ```bash
 npm test                                   # API
+NODE_PATH=$(npm root -g) node test/demo-e2e.js  # demo estática bajo /Control-flota-sag-/
 NODE_PATH=$(npm root -g) node test/e2e.js  # navegador real (Chromium + Playwright): incluye salida/llegada SIN internet
 ```
 
