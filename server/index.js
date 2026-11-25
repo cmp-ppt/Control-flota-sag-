@@ -9,6 +9,13 @@ const { checkPin } = require('./seed');
 const L = require('./logic');
 
 const app = express();
+app.set('trust proxy', 1); // detrás del proxy HTTPS del alojamiento
+app.use((req, res, next) => {
+  if (req.headers['x-forwarded-proto'] === 'https') res.setHeader('Strict-Transport-Security', 'max-age=31536000');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  next();
+});
+app.get('/healthz', (req, res) => res.json({ ok: true }));
 app.use(express.json({ limit: '25mb' }));
 const db = () => store.load();
 const uid = (p) => `${p}${crypto.randomBytes(5).toString('hex')}`;

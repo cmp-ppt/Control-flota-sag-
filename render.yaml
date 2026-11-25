@@ -1,0 +1,12 @@
+# Render.com: "New > Blueprint" y elegir este repositorio. HTTPS automático.
+# El disco persistente es necesario (guarda la base y las fotos); requiere un plan de pago.
+services:
+  - type: web
+    name: control-flota
+    runtime: docker
+    plan: starter
+    healthCheckPath: /healthz
+    disk:
+      name: datos
+      mountPath: /data
+      sizeGB: 2

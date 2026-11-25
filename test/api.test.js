@@ -90,7 +90,7 @@ const PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJA
   assert.strictEqual(cs[0].estado_revision, 'VALIDADA');
 
   // transcripción de papel
-  r = await call('/api/admin/viajes/papel', { fecha: hoy, id_vehiculo: veh.id, id_conductor: 'P011', km_inicial: 45290, km_final: 45350,
+  r = await call('/api/admin/viajes/papel', { fecha: hoy, id_vehiculo: 'V002', id_conductor: 'P011', km_inicial: 45290, km_final: 45350,
     hora_salida: '22:00', hora_llegada: '23:30', pasajeros: 1, id_destino: 'D002', foto: PNG }, ta);
   assert.strictEqual(r.status, 200, JSON.stringify(r.data));
 
